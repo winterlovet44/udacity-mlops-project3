@@ -14,7 +14,7 @@ The data use to train model is Census 1994 [here](https://github.com/udacity/nd0
 I use `train_test_split` function of Scikit-learn to split data into train, test dataset with ratio is 80-20.
 
 The sample data:
-```json
+```javascript
 {
     'age': 39,
     'workclass': 'State-gov',
