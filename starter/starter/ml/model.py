@@ -1,8 +1,13 @@
+import os
+import joblib
+
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 
 
 # Optional: implement hyperparameter tuning.
-def train_model(X_train, y_train):
+def train_model(X_train, y_train) -> RandomForestClassifier:
     """
     Trains a machine learning model and returns it.
 
@@ -18,7 +23,9 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
 
-    pass
+    model = RandomForestClassifier()
+    model.fit(X_train, y_train)
+    return model
 
 
 def compute_model_metrics(y, preds):
@@ -43,18 +50,54 @@ def compute_model_metrics(y, preds):
     return precision, recall, fbeta
 
 
-def inference(model, X):
+def inference(model: RandomForestClassifier, X: np.array) -> int:
     """ Run model inferences and return the predictions.
 
     Inputs
     ------
-    model : ???
+    model : Sklearn RandomForestClassifier model
         Trained machine learning model.
     X : np.array
         Data used for prediction.
     Returns
     -------
-    preds : np.array
+    preds : int
         Predictions from the model.
     """
-    pass
+    return model.predict(X)
+
+
+def save_model(model: RandomForestClassifier, filename: str, model_dir: str='model'):
+    """
+    Save a Scikit-learn model to a file using joblib.
+
+    Parameters
+    ----------
+    model : Scikit-learn model
+        The Scikit-learn model to be saved.
+    filename : str
+        The name of the file to save the model to.
+    model_dir: str, default: model
+        The folder contains all model file
+
+    Returns
+    -------
+    None.
+
+    """
+    path = os.path.join(model_dir, filename)
+    joblib.dump(model, path)
+
+def load_model(path: str) -> RandomForestClassifier:
+    """
+    Load a Scikit-learn model from a file using joblib.
+
+    Args:
+        path: str
+        The name of the file that contains the model.
+
+    Returns:
+        The Scikit-learn model that was loaded from the file.
+    """
+
+    return joblib.load(path)
