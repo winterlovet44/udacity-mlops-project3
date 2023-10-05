@@ -1,11 +1,59 @@
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+
+
+def load_data(path: str) -> pd.DataFrame:
+    """
+    Load data from a CSV file.
+
+    Args:
+        path: The path to the CSV file.
+
+    Returns:
+        A Pandas DataFrame containing the data from the CSV file.
+    """
+    # Read the data from the CSV file.
+    data = pd.read_csv(path)
+
+    return data
+
+
+def clean_data(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Clean the data by removing spaces in column names,
+    converting invalid dtypes in str dtypes to np.nan and
+    removing them, and removing values '?' in data.
+
+    Args:
+        df: The Pandas DataFrame to be cleaned.
+
+    Returns:
+        The cleaned Pandas DataFrame.
+    """
+    # Remove space in column name
+    print(f"Data contains {df.shape[0]} rows")
+    df.columns = df.columns.str.strip()
+    object_cols = df.select_dtypes('object').columns
+    # Update invalid dtype in str dtypes to np.nan and remove it
+    df.loc[:, object_cols] = df[object_cols].applymap(
+        lambda x: x.strip() if isinstance(x, str) else np.nan
+    )
+    df = df.dropna(subset=object_cols, how='any').reset_index(drop=True)
+    # Remove value '?' in data
+    mask = df.applymap(
+        lambda x: x == "?" if isinstance(x, str) else False
+    ).any(axis=1)
+    df = df[~mask].reset_index(drop=True)
+    print(f"Data after cleaned contains {df.shape[0]} rows")
+    return df
 
 
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None
 ):
-    """ Process the data used in the machine learning pipeline.
+    """
+    Process the data used in the machine learning pipeline.
 
     Processes the data using one hot encoding for the categorical features and a
     label binarizer for the labels. This can be used in either training or
