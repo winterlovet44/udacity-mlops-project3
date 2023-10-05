@@ -3,7 +3,7 @@
 For additional information see the Model Card paper: https://arxiv.org/pdf/1810.03993.pdf
 
 ## Model Details
-
+This model was built by me - Hau Pham. This model use Scikit-learn Random Forest Classifier and Census dataset.
 ## Intended Use
 
 ## Training Data
