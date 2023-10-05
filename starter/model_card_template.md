@@ -9,7 +9,7 @@ This model was built by me - Hau Pham. This model use Scikit-learn Random Forest
 This model was built to predict salary of person.
 ## Training Data
 
-The data use to train model is Census 1994 [here](https://github.com/udacity/nd0821-c3-starter-code/blob/master/starter/data/census.csv). This data was extracted from the [1994 Census bureau database](http://www.census.gov/en.html) by Ronny Kohavi and Barry Becker (Data Mining and Visualization, Silicon Graphics)
+The data use to train model is Census 1994 [data](https://github.com/udacity/nd0821-c3-starter-code/blob/master/starter/data/census.csv). This data was extracted from the [1994 Census bureau database](http://www.census.gov/en.html) by Ronny Kohavi and Barry Becker (Data Mining and Visualization, Silicon Graphics)
 
 I use `train_test_split` function of Scikit-learn to split data into train, test dataset with ratio is 80-20.
 
@@ -35,9 +35,19 @@ The sample data:
 ```
 ## Evaluation Data
 
-## Metrics
-_Please include the metrics used and your model's performance on those metrics._
+The evaluation data use 20% of entire dataset.
+The result of evaluation is:
+    - Precision: 0.72
+    - Recall: 0.26
+    - Fbeta: 0.38
+
 
 ## Ethical Considerations
 
+This model has been trained on Census data and not bias on any groups or people.
+
+
 ## Caveats and Recommendations
+
+1. This model was implemented for batch predictions.
+2. The model may not fit for now because of the data was collected on 1994
