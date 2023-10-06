@@ -4,6 +4,7 @@ import joblib
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
+from starter.ml.data import process_data
 
 
 # Optional: implement hyperparameter tuning.
@@ -101,3 +102,42 @@ def load_model(path: str) -> RandomForestClassifier:
     """
 
     return joblib.load(path)
+
+def slices_performance(df, categorical_features, model, encoder, lb, label='salary'):
+    """
+    Perform evaluation for each category in categorycal features.
+
+    Parameters
+    df: pd.DataFrame
+        Dataset for training
+    categorical_features: list
+        List categorical feature
+    model: RandomForestClassifier
+        Trained model
+    encoder: OneHotEncoder
+        One hot encoder model for encode cateogorical feature
+    lb: LabelBinarizer
+        Label binarry encoder
+    label: str
+        Column name of label
+    
+    Returns
+    ---------
+    Dictionary contains performance of each category
+    """
+    result = {}
+    for feature in categorical_features:
+        for val in df[feature].unique():
+            mask = df[df[feature] == val]
+            X_test, y_test, encoder, lb = process_data(
+                mask,
+                categorical_features=categorical_features,
+                label=label,
+                training=False,
+                encoder=encoder,
+                lb=lb
+            )
+            preds = model.predict(X_test)
+            prec, recall, fbeta = compute_model_metrics(y_test, preds)
+            result[f"{feature}_{val}"] = f"Precision: {prec:.1f}, Recall: {recall:.1f}, fbeta: {fbeta:.1f}"
+    return result

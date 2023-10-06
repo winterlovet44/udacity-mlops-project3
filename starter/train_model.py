@@ -3,12 +3,12 @@ import os
 
 from sklearn.model_selection import train_test_split
 # Add the necessary imports for the starter code.
-from ml.model import train_model, compute_model_metrics, save_model
-from ml.data import load_data, clean_data, process_data
+from starter.ml.model import train_model, compute_model_metrics, save_model
+from starter.ml.data import load_data, clean_data, process_data
 
 
-DATA_PATH = "../data/census.csv"
-MODEL_DIR = "../model/"
+DATA_PATH = "data/census.csv"
+MODEL_DIR = "model/"
 MODEL_FILE_NAME = 'model_v2.pkl'
 # CURRENT_TIME = datetime.now().strptime("dd-MM-yyyy")
 
@@ -17,7 +17,7 @@ data = load_data(path=DATA_PATH)
 data = clean_data(df=data)
 
 # Save cleaned data
-data.to_csv("../data/census_cleaned.csv", index=False)
+data.to_csv("data/census_cleaned.csv", index=False)
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20)
@@ -35,6 +35,10 @@ cat_features = [
 X_train, y_train, encoder, lb = process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
+
+# Save encoder and labeler for future usage
+save_model(encoder, filename="encoder.pkl", model_dir=MODEL_DIR)
+save_model(lb, filename="label.pkl", model_dir=MODEL_DIR)
 
 # Proces the test data with the process_data function.
 X_test, y_test, _, _ = process_data(
