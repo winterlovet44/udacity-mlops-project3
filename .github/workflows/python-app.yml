@@ -33,6 +33,7 @@ jobs:
 
     - name: setup dvc
       run: |
+        cd starter
         dvc pull
     - name: Install dependencies
       run: |
