@@ -15,6 +15,10 @@ MODEL_FILE_NAME = 'model_v2.pkl'
 # Add code to load in the data.
 data = load_data(path=DATA_PATH)
 data = clean_data(df=data)
+
+# Save cleaned data
+data.to_csv("../data/census_cleaned.csv", index=False)
+
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20)
 

@@ -1,2 +1,5 @@
 [core]
     no_scm = True
+    remote = s3bucket
+['remote "s3bucket"']
+    url = s3://haupcmlopsprj3
