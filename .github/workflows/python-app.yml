@@ -35,7 +35,7 @@ jobs:
     - name: setup dvc
       run: |
         cd starter
-        dvc pull
+        dvc pull -v
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
