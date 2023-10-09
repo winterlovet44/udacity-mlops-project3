@@ -1,9 +1,10 @@
-pandas==1.3.5
-scikit-learn==1.3.0
+pandas
+scikit-learn
 pytest
 requests
-fastapi==0.63.0
+fastapi
 uvicorn
 gunicorn
 pydantic
 httpx
+dvc[s3]
