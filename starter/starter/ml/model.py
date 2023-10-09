@@ -1,9 +1,9 @@
-import os
+"""Module cotains function to train ML model."""
 import joblib
-
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
+
 from starter.ml.data import process_data
 
 
@@ -68,7 +68,7 @@ def inference(model: RandomForestClassifier, X: np.array) -> int:
     return model.predict(X)
 
 
-def save_model(model: RandomForestClassifier, filename: str, model_dir: str='model'):
+def save_model(model: RandomForestClassifier, path: str):
     """
     Save a Scikit-learn model to a file using joblib.
 
@@ -76,17 +76,10 @@ def save_model(model: RandomForestClassifier, filename: str, model_dir: str='mod
     ----------
     model : Scikit-learn model
         The Scikit-learn model to be saved.
-    filename : str
+    path : str
         The name of the file to save the model to.
-    model_dir: str, default: model
-        The folder contains all model file
-
-    Returns
-    -------
-    None.
-
     """
-    path = os.path.join(model_dir, filename)
+
     joblib.dump(model, path)
 
 def load_model(path: str) -> RandomForestClassifier:

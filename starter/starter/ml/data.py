@@ -34,6 +34,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     # Remove space in column name
     print(f"Data contains {df.shape[0]} rows")
     df.columns = df.columns.str.strip()
+    df.columns = df.columns.str.replace("-", "_")
     object_cols = df.select_dtypes('object').columns
     # Update invalid dtype in str dtypes to np.nan and remove it
     df.loc[:, object_cols] = df[object_cols].applymap(
