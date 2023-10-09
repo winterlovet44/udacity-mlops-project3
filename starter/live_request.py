@@ -23,7 +23,6 @@ sample = {
     'capital_loss': 0,
     'hours_per_week': 50,
     'native_country': 'United-States',
-    'salary': '<=50K'
 }
 
 
