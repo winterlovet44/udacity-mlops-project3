@@ -46,7 +46,7 @@ The result of evaluation is:
 
 - **Data**: This model trained on Census dataset and only use for learning.
 - **Diversity**: This model is neutral, it use different groups of features to train. It not bias on any group or people
-- **Fairness**: the model was evaluated with 3 metrics for entire dataset. The report about evaluation of each category can be found [here](https://github.com/winterlovet44/udacity-mlops-project3/blob/main/starter/slice_output.txt)
+- **Fairness**: The evaluation is fair for all features in the dataset. The report about evaluation of each category can be found [here](https://github.com/winterlovet44/udacity-mlops-project3/blob/main/starter/slice_output.txt)
 
 
 ## Caveats and Recommendations
