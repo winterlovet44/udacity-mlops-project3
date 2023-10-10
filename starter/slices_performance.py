@@ -19,7 +19,7 @@ lb = load_model(path=param['LABEL_PATH'])
 encoder = load_model(path=param['ENCODER_PATH'])
 
 result = slices_performance(
-    df=data, categorical_features=cat_features, model=model, encoder=encoder, lb=lb)
+    df=test, categorical_features=cat_features, model=model, encoder=encoder, lb=lb)
 
 with open("slice_output.txt", "w") as f:
     json.dump(result, f, indent=4)
